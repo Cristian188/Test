@@ -1,7 +1,6 @@
-<div class="jumbotron">
-  <ul>
-    <li ng-repeat="issue in issuesList">
-      <span>{{issue.title}}</span>
-    </li>
-  </ul>
+<div class="list-group">
+    <a href="#/{{issue.number}}" class="list-group-item list-group-item-action" ng-repeat="issue in issuesList">
+      <strong>{{issue.title}}</strong>
+      <span class="badge badge-primary badge-pill">{{issue.comments}}</span>
+    </a>
 </div>

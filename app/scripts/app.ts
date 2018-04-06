@@ -18,7 +18,20 @@ app.config(["$routeProvider",
             .when('/', {
                 controller: issuesApp.Controllers.IssuesController.nameController, templateUrl: 'views/main.html'
             })
+            .when('/:issueNumber', {
+                controller: issuesApp.Controllers.IssueController.nameController, templateUrl: 'views/issue.html'
+            })
             .otherwise({
                 redirectTo: '/'
             })
+    }]).config(['$locationProvider', 
+        function($locationProvider: any) {
+
+        $locationProvider.hashPrefix('');
+      }]).run(["$rootScope", "$window", function (
+        $rootScope: any, $window: ng.IWindowService) {
+
+        $rootScope.showBackButton = false;
+        $rootScope.goBack = () => {$window.history.back()}
+
     }]);

@@ -26,23 +26,11 @@
         <div class="container">
           <div class="navbar-header">
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+            <button ng-show="showBackButton" ng-click="goBack()" type="button" class="navbar-toggle">
+              <span class="glyphicon glyphicon-chevron-left"></span>
             </button>
 
-            <a class="navbar-brand" href="#/">issues</a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul>
+            <a class="navbar-brand" href="#/">AngularJs Issues</a>
           </div>
         </div>
       </div>
@@ -54,7 +42,7 @@
 
     <div class="footer">
       <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <p>Angular Issues</p>
       </div>
     </div>
 

@@ -10,7 +10,9 @@ module issuesApp.Controllers {
   export class IssuesController {
       public static nameController = "IssuesController";
       
-      constructor(private $scope: IIssuesController, private issuesService: issuesApp.Services.IssuesService) {
+      constructor(private $scope: IIssuesController,$rootScope: any, private issuesService: issuesApp.Services.IssuesService) {
+
+        $rootScope.showBackButton = false;
         // Load Issues.
         this.getIssues();
       }

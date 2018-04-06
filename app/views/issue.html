@@ -1,0 +1,18 @@
+<div class="title">
+    <span>{{currentIssue.title}}</span>
+</div>
+
+<div>
+    <div ng-show="showNoComments" class="alert alert-warning">
+        <strong>0 comments</strong>
+    </div>
+    <div class="well" ng-repeat="comment in comments">
+        <div class="row">
+            <div class="col-md-3 user">
+                <img src="{{comment.user.avatar_url}}" height="44" width="44" alt="">
+                <strong class="d-block">{{comment.user.login}}</strong>
+            </div>
+            <div class="col-md-9" style="overflow:hidden">{{comment.body}}</div>
+        </div>
+    </div>
+</div>
