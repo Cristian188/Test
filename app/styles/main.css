@@ -52,17 +52,13 @@ body {
   border-top: 1px solid #e5e5e5;
 }
 
-.search{
+.search, .sort{
   margin-bottom: 15px;
 }
 
 .loading{
   padding: 15px;
   text-align: center;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
 }
 
 /* Responsive: Portrait tablets and up */

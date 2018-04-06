@@ -45,6 +45,11 @@ var issuesApp;
                 this.$scope = $scope;
                 this.issuesService = issuesService;
                 $rootScope.showBackButton = false;
+                $scope.sortProperties = [
+                    { name: "Title", value: "title" },
+                    { name: "Most commented", value: "-comments" },
+                    { name: "Least commented", value: "comments" },
+                ];
                 $scope.loading = true;
                 this.getIssues();
             }

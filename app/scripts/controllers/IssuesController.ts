@@ -7,6 +7,8 @@ module issuesApp.Controllers {
      issuesList: Models.Issue[];
      issueSearch: string;
      loading: boolean;
+     sortBy: string;
+     sortProperties: any[];
   }
 
   export class IssuesController {
@@ -16,6 +18,12 @@ module issuesApp.Controllers {
 
         $rootScope.showBackButton = false;
 
+        $scope.sortProperties = [
+          {name:"Title", value:"title"},
+          {name:"Most commented", value:"-comments"},
+          {name:"Least commented", value:"comments"},
+        ];
+        
         $scope.loading = true;
         // Load Issues.
         this.getIssues();

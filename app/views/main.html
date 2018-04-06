@@ -1,10 +1,25 @@
-<input class="form-control search" ng-model="issueSearch" type="text" placeholder="Search issue..">
+
+<div class="row">
+  <div class="col-md-8">
+      <input class="form-control search" ng-model="issueSearch" type="text" placeholder="Search issue..">
+  </div>
+  <div class="col-md-4">
+    <select class="form-control sort" ng-model="sortBy" ng-options="property.value as property.name for property in sortProperties">
+        <option value="">Sort by..</option>
+    </select>
+  </div>
+</div>
+
+
+
 
 <div class="loading" ng-show="loading">
   <img src="../images/loading.gif" height="44" width="44" alt="">
 </div>
+
+
 <div class="list-group">
-    <a href="#/{{issue.number}}" class="list-group-item list-group-item-action" ng-repeat="issue in issuesList | filter:{title: issueSearch}">
+    <a href="#/{{issue.number}}" class="list-group-item list-group-item-action" ng-repeat="issue in issuesList | filter:{title: issueSearch} | orderBy:sortBy">
       <strong>{{issue.title}}</strong>
       <span class="badge badge-primary badge-pill">{{issue.comments}}</span>
     </a>
