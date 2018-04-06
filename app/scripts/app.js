@@ -45,13 +45,17 @@ var issuesApp;
                 this.$scope = $scope;
                 this.issuesService = issuesService;
                 $rootScope.showBackButton = false;
+                $scope.loading = true;
                 this.getIssues();
             }
             IssuesController.prototype.getIssues = function () {
                 var _this = this;
                 this.issuesService.getAgularIssues().then(function (issues) {
                     _this.$scope.issuesList = issues;
+                }).finally(function () {
+                    _this.$scope.loading = false;
                 });
+                ;
             };
             IssuesController.nameController = "IssuesController";
             return IssuesController;
@@ -71,8 +75,11 @@ var issuesApp;
                 this.issuesService = issuesService;
                 this.$routeParams = $routeParams;
                 $rootScope.showBackButton = true;
+                $scope.loading = true;
                 this.getIssue($routeParams.issueNumber).then(function () {
                     _this.getIssueCooments();
+                }).finally(function () {
+                    $scope.loading = false;
                 });
             }
             IssueController.prototype.getIssue = function (id) {

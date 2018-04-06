@@ -1,5 +1,10 @@
+<input class="form-control search" ng-model="issueSearch" type="text" placeholder="Search issue..">
+
+<div class="loading" ng-show="loading">
+  <img src="../images/loading.gif" height="44" width="44" alt="">
+</div>
 <div class="list-group">
-    <a href="#/{{issue.number}}" class="list-group-item list-group-item-action" ng-repeat="issue in issuesList">
+    <a href="#/{{issue.number}}" class="list-group-item list-group-item-action" ng-repeat="issue in issuesList | filter:{title: issueSearch}">
       <strong>{{issue.title}}</strong>
       <span class="badge badge-primary badge-pill">{{issue.comments}}</span>
     </a>

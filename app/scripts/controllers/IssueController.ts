@@ -2,8 +2,8 @@ module issuesApp.Controllers {
   export interface IIssueControllerScope extends ng.IScope {
     currentIssue: Models.Issue;
     comments: any[];
-    showBackButton: boolean;
     showNoComments: boolean;
+    loading: boolean;
   }
 
   export interface IRouteParams extends ng.route.IRouteParamsService{
@@ -19,8 +19,11 @@ module issuesApp.Controllers {
       
       $rootScope.showBackButton = true;
       // Load issue.
+      $scope.loading = true;
       this.getIssue($routeParams.issueNumber).then(()=>{
         this.getIssueCooments();
+      }).finally(()=>{
+        $scope.loading = false;
       });
     }
 
