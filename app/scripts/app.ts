@@ -1,4 +1,4 @@
-/// <reference path="controllers/IssuesController.ts" />
+/// <reference path="controllers/IssuesListController.ts" />
 /// <reference path="../../typings/jquery/jquery.d.ts" />
 /// <reference path="../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../typings/angularjs/angular-route.d.ts" />
@@ -16,10 +16,10 @@ app.config(["$routeProvider",
 
         $routeProvider
             .when('/', {
-                controller: issuesApp.Controllers.IssuesController.nameController, templateUrl: 'views/main.html'
+                controller: issuesApp.Controllers.IssuesListController.nameController, templateUrl: 'views/main.html'
             })
             .when('/:issueNumber', {
-                controller: issuesApp.Controllers.IssueController.nameController, templateUrl: 'views/issue.html'
+                controller: issuesApp.Controllers.IssuesController.nameController, templateUrl: 'views/issue.html'
             })
             .otherwise({
                 redirectTo: '/'

@@ -1,40 +1,45 @@
-/// <reference path="../../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../scripts/services/IssuesService.ts" />
-
 module issuesApp.Controllers {
-
-  interface IIssuesController extends ng.IScope {
-     issuesList: Models.Issue[];
-     issueSearch: string;
-     loading: boolean;
-     sortBy: string;
-     sortProperties: any[];
+  export interface IIssuesControllerScope extends ng.IScope {
+    currentIssue: Models.Issue;
+    comments: any[];
+    showNoComments: boolean;
+    loading: boolean;
   }
 
+  export interface IRouteParams extends ng.route.IRouteParamsService{
+    issueNumber:number;
+  }
   export class IssuesController {
-      public static nameController = "IssuesController";
+    public static nameController = "IssuesController";
+
+    constructor (private $scope: IIssuesControllerScope, 
+      private $rootScope: any,
+      private issuesService: issuesApp.Services.IssuesService,
+      private $routeParams: IRouteParams ) {
       
-      constructor(private $scope: IIssuesController,$rootScope: any, private issuesService: issuesApp.Services.IssuesService) {
+      $rootScope.showBackButton = true;
+      // Load issue.
+      $scope.loading = true;
+      this.getIssue($routeParams.issueNumber).then(()=>{
+        this.getIssueCooments();
+      }).finally(()=>{
+        $scope.loading = false;
+      });
+    }
 
-        $rootScope.showBackButton = false;
+    public getIssue(id: number): ng.IPromise<void>{
+      return this.issuesService.getAgularIssue(id).then((issue: Models.Issue) => {
+          this.$scope.currentIssue = issue;
+      });
+    }
 
-        $scope.sortProperties = [
-          {name:"Title", value:"title"},
-          {name:"Most commented", value:"-comments"},
-          {name:"Least commented", value:"comments"},
-        ];
-        
-        $scope.loading = true;
-        // Load Issues.
-        this.getIssues();
-      }
-
-      public getIssues(){
-        this.issuesService.getAgularIssues().then((issues: any) => {
-          this.$scope.issuesList = issues;
-        }).finally(()=>{
-          this.$scope.loading = false;
-        });;
-      }
+    public getIssueCooments(){
+      this.issuesService.getIssueComments(this.$scope.currentIssue).then((comments: any[]) => {
+          if (comments != null){
+              this.$scope.comments = comments;
+              this.$scope.showNoComments = comments.length == 0;
+          }
+      });
+    }
   }
 }

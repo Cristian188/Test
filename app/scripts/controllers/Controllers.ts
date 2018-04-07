@@ -1,15 +1,15 @@
+/// <reference path="IssuesListController.ts" />
 /// <reference path="IssuesController.ts" />
-/// <reference path="IssueController.ts" />
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 
 angular.module('Controllers', [])
-    .controller("IssuesController", ["$scope", 
+    .controller("IssuesListController", ["$scope", 
     "$rootScope",
     "IssuesService", 
-    issuesApp.Controllers.IssuesController])
-    .controller("IssueController", ["$scope",
+    issuesApp.Controllers.IssuesListController])
+    .controller("IssuesController", ["$scope",
     "$rootScope", 
     "IssuesService", 
     "$routeParams",
-    issuesApp.Controllers.IssueController])
+    issuesApp.Controllers.IssuesController])
     ;

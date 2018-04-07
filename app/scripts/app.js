@@ -40,9 +40,10 @@ var issuesApp;
 (function (issuesApp) {
     var Controllers;
     (function (Controllers) {
-        var IssuesController = (function () {
-            function IssuesController($scope, $rootScope, issuesService) {
+        var IssuesListController = (function () {
+            function IssuesListController($scope, $rootScope, issuesService) {
                 this.$scope = $scope;
+                this.$rootScope = $rootScope;
                 this.issuesService = issuesService;
                 $rootScope.showBackButton = false;
                 $scope.sortProperties = [
@@ -53,7 +54,7 @@ var issuesApp;
                 $scope.loading = true;
                 this.getIssues();
             }
-            IssuesController.prototype.getIssues = function () {
+            IssuesListController.prototype.getIssues = function () {
                 var _this = this;
                 this.issuesService.getAgularIssues().then(function (issues) {
                     _this.$scope.issuesList = issues;
@@ -62,18 +63,18 @@ var issuesApp;
                 });
                 ;
             };
-            IssuesController.nameController = "IssuesController";
-            return IssuesController;
+            IssuesListController.nameController = "IssuesListController";
+            return IssuesListController;
         }());
-        Controllers.IssuesController = IssuesController;
+        Controllers.IssuesListController = IssuesListController;
     })(Controllers = issuesApp.Controllers || (issuesApp.Controllers = {}));
 })(issuesApp || (issuesApp = {}));
 var issuesApp;
 (function (issuesApp) {
     var Controllers;
     (function (Controllers) {
-        var IssueController = (function () {
-            function IssueController($scope, $rootScope, issuesService, $routeParams) {
+        var IssuesController = (function () {
+            function IssuesController($scope, $rootScope, issuesService, $routeParams) {
                 var _this = this;
                 this.$scope = $scope;
                 this.$rootScope = $rootScope;
@@ -87,13 +88,13 @@ var issuesApp;
                     $scope.loading = false;
                 });
             }
-            IssueController.prototype.getIssue = function (id) {
+            IssuesController.prototype.getIssue = function (id) {
                 var _this = this;
                 return this.issuesService.getAgularIssue(id).then(function (issue) {
                     _this.$scope.currentIssue = issue;
                 });
             };
-            IssueController.prototype.getIssueCooments = function () {
+            IssuesController.prototype.getIssueCooments = function () {
                 var _this = this;
                 this.issuesService.getIssueComments(this.$scope.currentIssue).then(function (comments) {
                     if (comments != null) {
@@ -102,22 +103,22 @@ var issuesApp;
                     }
                 });
             };
-            IssueController.nameController = "IssueController";
-            return IssueController;
+            IssuesController.nameController = "IssuesController";
+            return IssuesController;
         }());
-        Controllers.IssueController = IssueController;
+        Controllers.IssuesController = IssuesController;
     })(Controllers = issuesApp.Controllers || (issuesApp.Controllers = {}));
 })(issuesApp || (issuesApp = {}));
 angular.module('Controllers', [])
+    .controller("IssuesListController", ["$scope",
+    "$rootScope",
+    "IssuesService",
+    issuesApp.Controllers.IssuesListController])
     .controller("IssuesController", ["$scope",
     "$rootScope",
     "IssuesService",
-    issuesApp.Controllers.IssuesController])
-    .controller("IssueController", ["$scope",
-    "$rootScope",
-    "IssuesService",
     "$routeParams",
-    issuesApp.Controllers.IssueController]);
+    issuesApp.Controllers.IssuesController]);
 angular.module('Services', [])
     .service("IssuesService", ['$http',
     '$q',
@@ -129,10 +130,10 @@ app.config(["$routeProvider",
     function ($routeProvider) {
         $routeProvider
             .when('/', {
-            controller: issuesApp.Controllers.IssuesController.nameController, templateUrl: 'views/main.html'
+            controller: issuesApp.Controllers.IssuesListController.nameController, templateUrl: 'views/main.html'
         })
             .when('/:issueNumber', {
-            controller: issuesApp.Controllers.IssueController.nameController, templateUrl: 'views/issue.html'
+            controller: issuesApp.Controllers.IssuesController.nameController, templateUrl: 'views/issue.html'
         })
             .otherwise({
             redirectTo: '/'
