@@ -1,4 +1,3 @@
-/// <reference path="../../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../scripts/services/IssuesService.ts" />
 
 module issuesApp.Controllers {
@@ -11,7 +10,7 @@ module issuesApp.Controllers {
      sortProperties: any[];
   }
 
-  export class IssuesListController {
+  export class IssuesListController implements ng.IController {
       public static nameController = "IssuesListController";
       
       constructor(private $scope: IIssuesListController,
@@ -38,5 +37,9 @@ module issuesApp.Controllers {
           this.$scope.loading = false;
         });;
       }
+
+      // Fix for Typescript compiler.
+      $onInit(){
+      };
   }
 }

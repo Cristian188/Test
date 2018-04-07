@@ -1,3 +1,4 @@
+"use strict";
 var issuesApp;
 (function (issuesApp) {
     var Services;
@@ -58,11 +59,14 @@ var issuesApp;
                 var _this = this;
                 this.issuesService.getAgularIssues().then(function (issues) {
                     _this.$scope.issuesList = issues;
-                }).finally(function () {
+                })["finally"](function () {
                     _this.$scope.loading = false;
                 });
                 ;
             };
+            IssuesListController.prototype.$onInit = function () {
+            };
+            ;
             IssuesListController.nameController = "IssuesListController";
             return IssuesListController;
         }());
@@ -84,7 +88,7 @@ var issuesApp;
                 $scope.loading = true;
                 this.getIssue($routeParams.issueNumber).then(function () {
                     _this.getIssueCooments();
-                }).finally(function () {
+                })["finally"](function () {
                     $scope.loading = false;
                 });
             }
@@ -103,6 +107,9 @@ var issuesApp;
                     }
                 });
             };
+            IssuesController.prototype.$onInit = function () {
+            };
+            ;
             IssuesController.nameController = "IssuesController";
             return IssuesController;
         }());

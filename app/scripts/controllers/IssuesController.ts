@@ -9,7 +9,7 @@ module issuesApp.Controllers {
   export interface IRouteParams extends ng.route.IRouteParamsService{
     issueNumber:number;
   }
-  export class IssuesController {
+  export class IssuesController implements ng.IController {
     public static nameController = "IssuesController";
 
     constructor (private $scope: IIssuesControllerScope, 
@@ -41,5 +41,9 @@ module issuesApp.Controllers {
           }
       });
     }
+
+    // Fix for Typescript compiler.
+    $onInit(){
+    };
   }
 }
